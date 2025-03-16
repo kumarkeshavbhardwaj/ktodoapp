@@ -17,6 +17,13 @@ const App = () => {
     }
   }
 
+  const deleteTask = (index) => {
+    const newTasks = [...tasks]
+    newTasks.splice(index, 1)
+    setTasks(newTasks)
+    localStorage.setItem('tasks', JSON.stringify(newTasks))
+  }
+
 
 
 
@@ -29,11 +36,16 @@ const App = () => {
     <div className='mt-5'>
       <ul className='max-h-80
       f overflow-y-auto'>
+        {tasks.length === 0 && <p className='text-center'>No tasks</p>} 
         {tasks.map((task, index) => (
+          
           <li key={index} className='m-2'>
           <h2>
           <input className='form-checkbox h-4 w-4 text-blue-600' type="checkbox" />
           <span className='ml-5 text-xl font-semibold'>{task}</span>
+          <button className='ml-2 text-red-600' onClick={() => deleteTask(index)}>
+          <i className='fas fa-trash'></i>
+          </button>
           </h2></li>
         ))} 
 
